@@ -4,18 +4,36 @@ const global = {
   region: "",
 };
 
+type countryFlag = {
+  png: string;
+  svg: string;
+  alt: string;
+};
+type countryName = {
+  common: string;
+  official: string;
+  nativeName: any;
+};
+type dataItem = {
+  capital: string[];
+  flags: countryFlag;
+  name: countryName;
+  population: number;
+  region: string;
+};
+type data = dataItem[];
 const openDropdown = document.querySelector(".open-dropdown") as HTMLElement;
 const dropdown = document.querySelector(".dropdown") as HTMLElement;
 const filterByRegion = document.querySelector(".filter-by-region") as HTMLElement;
 const searchForm = document.querySelector(".search-form") as HTMLElement;
-const searchInput = document.querySelector(".search-input") as HTMLElement;
+const searchInput = document.querySelector(".search-input") as HTMLInputElement;
 
 function toggleMenu() {
-  if (dropdown?.style.display === "none") {
-    dropdown.style.display = "flex";
+  if (dropdown?.style.opacity === "0") {
+    dropdown.style.opacity = "1";
     openDropdown.innerText = "expand_less";
   } else {
-    dropdown.style.display = "none";
+    dropdown.style.opacity = "0";
     openDropdown.innerText = "expand_more";
   }
 }
@@ -26,7 +44,7 @@ function selectRegion(e: MouseEvent) {
       const regionName = document.querySelector(".region-name") as HTMLElement;
       if (e.target.textContent) {
         regionName.innerText = e.target.textContent;
-        dropdown.style.display = "none";
+        dropdown.style.opacity = "0";
         openDropdown.innerText = "expand_more";
         global.region = e.target.textContent;
         displayCountries();
@@ -42,7 +60,7 @@ function clearRegion(e: MouseEvent) {
       !e.target.classList.contains("dropdown") &&
       !e.target.classList.contains("region")
     ) {
-      dropdown.style.display = "none";
+      dropdown.style.opacity = "0";
       openDropdown.innerText = "expand_more";
     }
   }
@@ -54,18 +72,19 @@ async function fetchData(endpoint: string) {
   return data;
 }
 
-async function displayCountries(filter = false, search?: string) {
+async function displayCountries(search?: string) {
   const countriesDiv = document.querySelector(".container") as HTMLElement;
   countriesDiv.innerHTML = ``;
-  let data;
+  let data: data;
   if (global.region) {
     data = await fetchData(`region/${global.region}?fields=id,name,population,region,capital,flags`);
   } else {
     data = await fetchData(`all?fields=id,name,population,region,capital,flags`);
   }
-  if (filter) {
+  if (search) {
     data = data.filter((item) => item.name.common.toLowerCase().includes(search?.toLowerCase()));
   }
+  console.log(data);
   const cardDiv = document.querySelector(".container");
   if (data.length === 0) {
     const info = document.createElement("info");
@@ -99,7 +118,7 @@ function addCommasToNumber(number: number) {
 
 async function searchForCountry(e: any) {
   e.preventDefault();
-  displayCountries(true, searchInput.value);
+  displayCountries(searchInput.value);
   searchInput.value = "";
 }
 
