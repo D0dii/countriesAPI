@@ -1,27 +1,6 @@
-const global = {
-  currentPage: window.location.pathname,
-  api_url: "https://restcountries.com/v3.1/",
-  region: "",
-};
+import { Fetcher } from "./modules/api";
+import { Information } from "./modules/api";
 
-type countryFlag = {
-  png: string;
-  svg: string;
-  alt: string;
-};
-type countryName = {
-  common: string;
-  official: string;
-  nativeName: any;
-};
-type dataItem = {
-  capital: string[];
-  flags: countryFlag;
-  name: countryName;
-  population: number;
-  region: string;
-};
-type data = dataItem[];
 const openDropdown = document.querySelector(".open-dropdown") as HTMLElement;
 const dropdown = document.querySelector(".dropdown") as HTMLElement;
 const filterByRegion = document.querySelector(".filter-by-region") as HTMLElement;
@@ -46,7 +25,7 @@ function selectRegion(e: MouseEvent) {
         regionName.innerText = e.target.textContent;
         dropdown.style.opacity = "0";
         openDropdown.innerText = "expand_more";
-        global.region = e.target.textContent;
+        Information.region = e.target.textContent;
         displayCountries();
       }
     }
@@ -66,25 +45,11 @@ function clearRegion(e: MouseEvent) {
   }
 }
 
-async function fetchData(endpoint: string) {
-  const response = await fetch(`${global.api_url}${endpoint}`);
-  const data = await response.json();
-  return data;
-}
-
 async function displayCountries(search?: string) {
   const countriesDiv = document.querySelector(".container") as HTMLElement;
   countriesDiv.innerHTML = ``;
-  let data: data;
-  if (global.region) {
-    data = await fetchData(`region/${global.region}?fields=id,name,population,region,capital,flags`);
-  } else {
-    data = await fetchData(`all?fields=id,name,population,region,capital,flags`);
-  }
-  if (search) {
-    data = data.filter((item) => item.name.common.toLowerCase().includes(search?.toLowerCase()));
-  }
-  console.log(data);
+
+  const data: data = await Fetcher.fetchCountries(search);
   const cardDiv = document.querySelector(".container");
   if (data.length === 0) {
     const info = document.createElement("info");
@@ -123,7 +88,7 @@ async function searchForCountry(e: any) {
 }
 
 function init() {
-  switch (global.currentPage) {
+  switch (window.location.pathname) {
     case "/":
     case "/index.html":
       openDropdown.addEventListener("click", toggleMenu);
