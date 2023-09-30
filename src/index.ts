@@ -9,28 +9,30 @@ const searchForm = document.querySelector(".search-form") as HTMLElement;
 const searchInput = document.querySelector(".search-input") as HTMLInputElement;
 const changeMode = document.querySelector(".mode-change") as HTMLElement;
 
+//TODO: when rendering need to add checking if dark mode
 function toggleTheme() {
-  console.log(mode);
   const body = document.querySelector("body") as HTMLElement;
   const navbar = document.querySelector(".navbar") as HTMLElement;
   const filterByRegion = document.querySelector(".filter-by-region") as HTMLElement;
   const searchBar = document.querySelector(".search-bar") as HTMLElement;
   const cards = document.querySelectorAll(".card") as NodeListOf<HTMLElement>;
+  const modeIcon = document.querySelector(".mode-icon") as HTMLElement;
+  const modeCaption = document.querySelector(".mode-caption") as HTMLElement;
   if (mode === "dark") {
     mode = "light";
-    body.style.backgroundColor = "#202C36";
-    body.style.color = "#FFFFFF";
-    searchInput.style.color = "#FFFFFF";
+    modeIcon.innerText = "light_mode";
+    modeCaption.innerText = "Light Mode";
   } else {
     mode = "dark";
-    body.style.backgroundColor = "#FAFAFA";
-    body.style.color = "#000000";
-    searchInput.style.color = "#000000";
+    modeIcon.innerText = "dark_mode";
+    modeCaption.innerText = "Dark Mode";
   }
+  body.classList.toggle("dark-body");
   navbar.classList.toggle("dark");
   filterByRegion.classList.toggle("dark");
   dropdown.classList.toggle("dark");
   searchBar.classList.toggle("dark");
+  searchInput.classList.toggle("input-dark");
   cards.forEach((card) => {
     card.classList.toggle("dark");
   });
