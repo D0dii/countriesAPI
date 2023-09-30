@@ -8,13 +8,18 @@ export class Displayer {
     const data: data = await Fetcher.fetchCountries(search);
     const cardDiv = document.querySelector(".container");
     if (data.length === 0) {
-      const info = document.createElement("info");
+      const main = document.querySelector("main") as HTMLElement;
+      const info = document.createElement("h1");
       info.innerText = "No matches found";
-      cardDiv?.appendChild(info);
+      info.style.textAlign = "center";
+      main.appendChild(info);
     } else {
       data.forEach((element) => {
         const card = document.createElement("div");
         card.classList.add("card");
+        if (localStorage.getItem("theme")) {
+          localStorage.getItem("theme") === "dark" ? card.classList.add("dark") : "";
+        }
         card.innerHTML = `
             <div>
                     <img src="${element.flags.png}" alt="flag of ${element.name.common}" class="card-image" />
