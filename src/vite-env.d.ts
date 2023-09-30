@@ -1,10 +1,5 @@
 /// <reference types="vite/client" />
 
-const global = {
-  currentPage: window.location.pathname,
-  region: "",
-};
-
 type dataItem = {
   capital: string[];
   flags: countryFlag;

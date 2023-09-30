@@ -98,6 +98,10 @@ body {
   gap: 0.5rem;
 }
 
+.mode-change:hover {
+  cursor: pointer;
+}
+
 main {
   padding-inline: 5rem;
   padding-block: 2rem;
@@ -125,9 +129,9 @@ main {
 
 .search-input {
   border: none;
-  background-color: #ffffff;
   outline: none;
   width: 100%;
+  background: transparent;
 }
 
 .search-input::-webkit-search-cancel-button {
@@ -213,6 +217,10 @@ main {
 .card-info-details {
   display: flex;
   flex-direction: column;
+}
+
+.dark {
+  background-color: #2b3844;
 }
 
 @media screen and (min-width: 750px) {
