@@ -92,6 +92,11 @@ body {
   font-size: 1.25rem;
 }
 
+.logo {
+  text-decoration: none;
+  color: inherit;
+}
+
 .mode-change {
   display: flex;
   align-items: center;

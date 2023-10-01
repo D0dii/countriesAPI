@@ -5,12 +5,15 @@ export class Fetcher {
     return data;
   }
 
-  static async fetchCountries(search?: string): Promise<data> {
+  static async fetchCountries(): Promise<data> {
     let data: data;
-    if (Information.region !== "") {
-      data = await this.fetchData(
-        `region/${Information.region}?fields=id,name,population,region,capital,flags`
-      );
+    const params = new URLSearchParams(window.location.search);
+    const search = params.get("search");
+    const region = params.get("region");
+    console.log(search);
+    console.log(region);
+    if (region) {
+      data = await this.fetchData(`region/${region}?fields=id,name,population,region,capital,flags`);
     } else {
       data = await this.fetchData(`all?fields=id,name,population,region,capital,flags`);
     }
@@ -21,9 +24,4 @@ export class Fetcher {
   }
 
   static async fetchCountry(id: string) {}
-}
-
-export class Information {
-  static search: string = "";
-  static region: string = "";
 }

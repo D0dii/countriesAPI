@@ -1,11 +1,10 @@
 import { Fetcher } from "./api";
 
 export class Displayer {
-  static async displayCountries(search?: string) {
+  static async displayCountries() {
     const countriesDiv = document.querySelector(".container") as HTMLElement;
     countriesDiv.innerHTML = ``;
-
-    const data: data = await Fetcher.fetchCountries(search);
+    const data: data = await Fetcher.fetchCountries();
     const cardDiv = document.querySelector(".container");
     if (data.length === 0) {
       const main = document.querySelector("main") as HTMLElement;

@@ -1,4 +1,3 @@
-import { Information } from "./modules/api";
 import { Displayer } from "./modules/displayData";
 
 let mode: string;
@@ -70,12 +69,10 @@ function toggleMenu() {
 function selectRegion(e: MouseEvent) {
   if (e.target instanceof Element) {
     if (e.target.classList.contains("region")) {
-      const regionName = document.querySelector(".region-name") as HTMLElement;
       if (e.target.textContent) {
-        regionName.innerText = e.target.textContent;
-        dropdown.style.opacity = "0";
-        openDropdown.innerText = "expand_more";
-        Information.region = e.target.textContent;
+        const params = new URLSearchParams(window.location.search);
+        params.set("region", e.target.textContent);
+        window.location.search = params.toString();
         Displayer.displayCountries();
       }
     }
@@ -97,7 +94,10 @@ function clearRegion(e: MouseEvent) {
 
 function searchForCountry(e: any) {
   e.preventDefault();
-  Displayer.displayCountries(searchInput.value);
+  Displayer.displayCountries();
+  const params = new URLSearchParams(window.location.search);
+  params.set("search", searchInput.value);
+  window.location.search = params.toString();
   searchInput.value = "";
 }
 
