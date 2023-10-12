@@ -4,7 +4,7 @@ export class Displayer {
   static async displayCountries() {
     const countriesDiv = document.querySelector(".container") as HTMLElement;
     countriesDiv.innerHTML = ``;
-    const data: data = await Fetcher.fetchCountries();
+    const data: allCountriesData = await Fetcher.fetchCountries();
     const cardDiv = document.querySelector(".container");
     if (data.length === 0) {
       const main = document.querySelector("main") as HTMLElement;
@@ -20,6 +20,7 @@ export class Displayer {
           localStorage.getItem("theme") === "dark" ? card.classList.add("dark") : "";
         }
         card.innerHTML = `
+        <a href="details.html?name=${element.name.common}">
             <div>
                     <img src="${element.flags.png}" alt="flag of ${element.name.common}" class="card-image" />
                   </div>
@@ -31,6 +32,7 @@ export class Displayer {
                       <span>Capital: ${element.capital[0]}</span>
                     </div>
                   </div>
+                  </a>
             `;
         cardDiv?.appendChild(card);
       });

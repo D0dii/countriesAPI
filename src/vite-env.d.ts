@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-type dataItem = {
+type allCountriesDataItem = {
   capital: string[];
   flags: countryFlag;
   name: countryName;
@@ -19,4 +19,16 @@ type countryName = {
   nativeName: any;
 };
 
-type data = dataItem[];
+type allCountriesData = allCountriesDataItem[];
+
+type countryDetailsData = countryDetailsDataItem[];
+
+type countryDetailsDataItem = allCountriesDataItem & {
+  subRegion: string;
+  topLevelDomain: string;
+  currencies: string[];
+  languages: string[];
+  borderCountries: string[];
+};
+
+type fetchDataReturn = allCountriesData & countryDetailsData;
