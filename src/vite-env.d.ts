@@ -24,11 +24,16 @@ type allCountriesData = allCountriesDataItem[];
 type countryDetailsData = countryDetailsDataItem[];
 
 type countryDetailsDataItem = allCountriesDataItem & {
-  subRegion: string;
-  topLevelDomain: string;
+  subregion: string;
+  tld: string;
   currencies: string[];
   languages: string[];
-  borderCountries: string[];
+  borders: string[];
 };
 
 type fetchDataReturn = allCountriesData & countryDetailsData;
+
+type errorInAPI = {
+  message: string;
+  status: string;
+};

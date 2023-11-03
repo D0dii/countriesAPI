@@ -52,6 +52,7 @@ function toggleTheme() {
   const cards = document.querySelectorAll(".card") as NodeListOf<HTMLElement>;
   const modeIcon = document.querySelector(".mode-icon") as HTMLElement;
   const modeCaption = document.querySelector(".mode-caption") as HTMLElement;
+  const goBackButton = document.querySelector(".arrow-back") as HTMLElement;
   if (mode === "dark") {
     mode = "light";
     modeIcon.innerText = "dark_mode";
@@ -64,13 +65,16 @@ function toggleTheme() {
   localStorage.setItem("theme", mode);
   body.classList.toggle("dark");
   navbar.classList.toggle("dark");
-  filterByRegion.classList.toggle("dark");
-  dropdown.classList.toggle("dark");
-  searchBar.classList.toggle("dark");
-  searchInput.classList.toggle("dark");
-  cards.forEach((card) => {
-    card.classList.toggle("dark");
-  });
+  filterByRegion ? filterByRegion.classList.toggle("dark") : "";
+  dropdown ? dropdown.classList.toggle("dark") : "";
+  searchBar ? searchBar.classList.toggle("dark") : "";
+  searchInput ? searchInput.classList.toggle("dark") : "";
+  cards
+    ? cards.forEach((card) => {
+        card.classList.toggle("dark");
+      })
+    : "";
+  goBackButton ? goBackButton.classList.toggle("dark") : "";
 }
 
 function toggleMenu() {
@@ -91,6 +95,7 @@ function selectRegion(e: MouseEvent) {
     if (e.target.classList.contains("region")) {
       if (e.target.textContent) {
         const params = new URLSearchParams(window.location.search);
+        params.delete("search");
         params.set("region", e.target.textContent);
         window.location.search = params.toString();
         Displayer.displayCountries();
@@ -138,6 +143,7 @@ function init() {
       Displayer.displayCountries();
       break;
     case "/details.html":
+      Displayer.displayCountryDetails();
   }
 }
 
