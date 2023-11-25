@@ -31,9 +31,7 @@ export class Fetcher {
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
     if (name) {
-      data = await this.fetchData(
-        `name/${name}?fullText=true?fields=id,name,population,region,capital,flags,subregion,topLevelDomain,currencies,languages,borders`
-      );
+      data = await this.fetchData(`name/${name}?fullText=true`);
       return data;
     }
     return null;
