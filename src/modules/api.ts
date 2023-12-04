@@ -1,5 +1,5 @@
 export class Fetcher {
-  private static async fetchData(endpoint: string): Promise<fetchDataReturn | null> {
+  static async fetchData(endpoint: string): Promise<fetchDataReturn | null> {
     const response = await fetch(`https://restcountries.com/v3.1/${endpoint}`);
     if (response.ok !== true) {
       return null;

@@ -53,6 +53,7 @@ function toggleTheme() {
   const modeIcon = document.querySelector(".mode-icon") as HTMLElement;
   const modeCaption = document.querySelector(".mode-caption") as HTMLElement;
   const goBackButton = document.querySelector(".arrow-back") as HTMLElement;
+  const borderCountries = document.querySelectorAll(".border-country") as NodeListOf<HTMLElement>;
   if (mode === "dark") {
     mode = "light";
     modeIcon.innerText = "dark_mode";

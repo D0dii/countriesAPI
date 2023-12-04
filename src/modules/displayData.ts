@@ -50,7 +50,6 @@ export class Displayer {
   static async displayCountryDetails() {
     const data: countryDetailsData | null = await Fetcher.fetchCountry();
     console.log(data);
-    const countryDetailsDiv = document.querySelector(".country-details") as HTMLElement;
     if (!data) {
       const main = document.querySelector("main") as HTMLElement;
       const info = document.createElement("h1");
@@ -58,101 +57,72 @@ export class Displayer {
       info.style.textAlign = "center";
       main.appendChild(info);
     } else {
-      data.forEach((element) => {
-        const img = document.createElement("img");
-        img.classList.add("country-details-img");
-        img.src = element.flags.svg;
-        img.alt = `flag of ${element.flags.alt}`;
+      const element = data[0];
+      const borderCountriesData = await Fetcher.fetchData("alpha?codes=" + element.borders);
 
-        const infoDiv = document.createElement("div");
+      console.log("element");
+      console.log(element);
+      const countryImage = document.querySelector('[data-role="country-img"]') as HTMLImageElement;
+      countryImage.src = element.flags.png;
+      countryImage.alt = element.flags.alt ? element.flags.alt : `Flag of ${element.name.common}`;
 
-        const countryName = document.createElement("h1");
-        countryName.innerText = element.name.common;
-        infoDiv.appendChild(countryName);
+      const countryName = document.querySelector('[data-role="country-name"]') as HTMLElement;
+      countryName.textContent = element.name.common;
 
-        const mainInfoDiv = document.createElement("div");
-        mainInfoDiv.innerHTML = `<div><span class="bold">Native Name: </span><span>${
-          (Object as any).values(element.name.nativeName)[0].official
-        }</span></div>
-        <div><span class="bold">Population: </span><span>${this.addCommasToNumber(
-          element.population
-        )}</span></div>
-        <div><span class="bold">Region: </span><span>${element.region}</span></div>
-        <div><span class="bold">Sub Region: </span><span>${element.subregion}</span></div>
-        <div><span class="bold">Capital: </span><span>${element.capital}</span></div>`;
-        infoDiv.appendChild(mainInfoDiv);
+      const nativeCountryName = document.querySelector('[data-role="country-native-name"]') as HTMLElement;
+      nativeCountryName.textContent = (Object as any).values(element.name.nativeName)[0].official;
 
-        const currenciesDiv = document.createElement("div");
+      const countryPopulation = document.querySelector('[data-role="country-population"]') as HTMLElement;
+      countryPopulation.textContent = this.addCommasToNumber(element.population);
 
-        const currenciesCaption = document.createElement("span");
-        currenciesCaption.classList.add("bold");
-        currenciesCaption.innerText = "Currencies: ";
-        currenciesDiv.appendChild(currenciesCaption);
+      const countryRegion = document.querySelector('[data-role="country-region"]') as HTMLElement;
+      countryRegion.textContent = element.region;
 
-        const topLevelDomain = document.createElement("div");
-        topLevelDomain.innerHTML = `<div><span class="bold">Top Level Domain: </span><span>${element.tld[0]}</span></div>`;
-        infoDiv.appendChild(topLevelDomain);
+      const countrySubRegion = document.querySelector('[data-role="country-sub-region"]') as HTMLElement;
+      countrySubRegion.textContent = element.subregion;
 
-        const currencies = document.createElement("span");
-        (Object as any).values(element.currencies).forEach((c: any) => {
-          const currency = document.createElement("span");
-          if (c !== (Object as any).values(element.currencies).pop()) {
-            currency.innerText = c.name + ", ";
-          } else {
-            currency.innerText = c.name;
-          }
-          currencies.appendChild(currency);
-        });
-        currenciesDiv.appendChild(currencies);
-        infoDiv.appendChild(currenciesDiv);
-
-        const languagesDiv = document.createElement("div");
-
-        const languagesCaption = document.createElement("span");
-        languagesCaption.classList.add("bold");
-        languagesCaption.innerText = "Languages: ";
-        languagesDiv.appendChild(languagesCaption);
-
-        const languages = document.createElement("span");
-        (Object as any).values(element.languages).forEach((l: any) => {
-          const language = document.createElement("span");
-          if (l !== (Object as any).values(element.languages).pop()) {
-            language.innerText = l + ", ";
-          } else {
-            language.innerText = l;
-          }
-          languages.appendChild(language);
-        });
-        languagesDiv.appendChild(languages);
-
-        const borderCountriesDiv = document.createElement("div");
-
-        const borderCountriesCaption = document.createElement("span");
-        borderCountriesCaption.classList.add("bold");
-        borderCountriesCaption.innerText = "Border Countries: ";
-
-        borderCountriesDiv.appendChild(borderCountriesCaption);
-
-        const borderCountries = document.createElement("div");
-        borderCountries.classList.add("border-countries");
-        if (element.borders) {
-          (Object as any).values(element.borders).forEach((c: any) => {
-            const borderCountry = document.createElement("span");
-            borderCountry.innerText = c;
-            borderCountry.classList.add("border-country");
-            borderCountries.appendChild(borderCountry);
-          });
-        } else {
-          borderCountriesCaption.innerText += "None";
+      const countryCapital = document.querySelector('[data-role="country-capital"]') as HTMLElement;
+      element.capital.forEach((capital) => {
+        countryCapital.textContent += capital;
+        if (element.capital[element.capital.length - 1] !== capital) {
+          countryCapital.textContent += ", ";
         }
-
-        borderCountriesDiv.appendChild(borderCountriesCaption);
-        borderCountriesDiv.appendChild(borderCountries);
-        countryDetailsDiv.appendChild(img);
-        countryDetailsDiv.appendChild(infoDiv);
-        countryDetailsDiv.appendChild(languagesDiv);
-        countryDetailsDiv.appendChild(borderCountriesDiv);
       });
+
+      const countryTopLevelDomain = document.querySelector(
+        '[data-role="country-top-level-domain"]'
+      ) as HTMLElement;
+      countryTopLevelDomain.textContent = element.tld;
+
+      const countryCurrencies = document.querySelector('[data-role="country-currencies"]') as HTMLElement;
+      let countryCurrenciesArray = (Object as any).values(element.currencies);
+      countryCurrenciesArray.forEach((currency: any) => {
+        countryCurrencies.textContent += currency.name;
+        if (currency.name !== countryCurrenciesArray[countryCurrenciesArray.length - 1].name) {
+          countryCurrencies.textContent += ", ";
+        }
+      });
+
+      const countryLanguages = document.querySelector('[data-role="country-languages"]') as HTMLElement;
+      let countryLanguagesArray = (Object as any).values(element.languages);
+      countryLanguagesArray.forEach((language: String) => {
+        countryLanguages.textContent += language;
+        if (countryLanguagesArray[countryLanguagesArray.length - 1] !== language) {
+          countryLanguages.textContent += ", ";
+        }
+      });
+
+      console.log(borderCountriesData);
+      const countryBorderCountries = document.querySelector('[data-role="country-border-countries"]');
+      if (borderCountriesData) {
+        borderCountriesData.forEach((border) => {
+          const borderCountry = document.createElement("a");
+          borderCountry.classList.add("border-country");
+          borderCountry.textContent = border.name.common;
+          borderCountry.href = `details.html?name=${border.name.common}`;
+          countryBorderCountries?.appendChild(borderCountry);
+        });
+      }
     }
   }
 

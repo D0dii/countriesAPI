@@ -36,13 +36,48 @@
       </div>
     </header>
     <main class="details-container">
-      <div class="arrow-back">
-        <a href="index.html">
-          <span class="material-symbols-outlined"> arrow_back </span><span>Back</span>
-        </a>
+      <div class="content-container">
+        <div class="arrow-back">
+          <a href="index.html">
+            <span class="material-symbols-outlined"> arrow_back </span><span>Back</span>
+          </a>
+        </div>
+        <div class="country-details">
+          <img class="country-details-img" data-role="country-img" />
+          <div class="country-details-info">
+            <h1 class="country-details-info-name" data-role="country-name"></h1>
+            <div class="country-details-info-main-secondary">
+              <div class="country-details-main-info" data-role="main-info">
+                <span
+                  ><span class="bold">Native Name: </span><span data-role="country-native-name"></span
+                ></span>
+                <span
+                  ><span class="bold">Population: </span><span data-role="country-population"></span
+                ></span>
+                <span><span class="bold">Region: </span><span data-role="country-region"></span></span>
+                <span
+                  ><span class="bold">Sub Region: </span><span data-role="country-sub-region"></span
+                ></span>
+                <span><span class="bold">Capital: </span><span data-role="country-capital"></span></span>
+              </div>
+              <div class="country-details-secondary-info" data-role="secondary-info">
+                <span
+                  ><span class="bold">Top Level Domain: </span
+                  ><span data-role="country-top-level-domain"></span
+                ></span>
+                <span
+                  ><span class="bold">Currencies: </span><span data-role="country-currencies"></span
+                ></span>
+                <span><span class="bold">Languages: </span><span data-role="country-languages"></span></span>
+              </div>
+            </div>
+            <div class="border-countries-section" data-role="border-countries">
+              <span class="bold">Border countries:</span>
+              <div class="border-countries" data-role="country-border-countries"></div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="country-details"></div>
     </main>
   </body>
 </html>

@@ -117,7 +117,7 @@ a {
 }
 
 main {
-  padding-inline: 5rem;
+  padding-inline: 1rem;
   padding-block: 2rem;
 }
 
@@ -273,10 +273,10 @@ body.dark {
 
 .arrow-back {
   display: flex;
-  border-radius: 2px;
+  border-radius: 6px;
   background: #fff;
   box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.29);
-  width: 6.5rem;
+  width: 8.5rem;
   height: 2rem;
   padding: 1.5rem 1rem;
   align-items: center;
@@ -285,9 +285,11 @@ body.dark {
 
 .arrow-back > a {
   display: flex;
+  margin-inline: auto;
+  gap: 0.625rem;
 }
 
-.arrow-back.dark {
+body.dark .arrow-back {
   background: #2b3844;
 }
 
@@ -299,13 +301,30 @@ body.dark {
 .country-details {
   margin-top: 4rem;
   line-height: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .country-details-img {
   border-radius: 5px;
   box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.03);
-  max-width: 320px;
-  max-height: 280px;
+  width: 100%;
+}
+
+.country-details-info-main-secondary {
+  display: flex;
+  flex-direction: column;
+}
+
+.country-details-main-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.country-details-secondary-info {
+  display: flex;
+  flex-direction: column;
+  margin-block: 32px;
 }
 
 .border-countries {
@@ -326,16 +345,47 @@ body.dark {
   box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.1);
 }
 
+body.dark .border-country {
+  background: #2b3844;
+  color: #fff;
+}
+
+.content-container {
+  margin-inline: auto;
+}
+
 @media screen and (min-width: 1050px) {
   .container {
     grid-template-columns: repeat(3, 260px);
   }
-  .country-details-img {
-    max-width: 560px;
-    max-height: 480px;
-  }
   .country-details {
+    flex-direction: row;
+    gap: 144px;
+  }
+  .country-details-info-main-secondary {
+    flex-direction: row;
+    gap: 112px;
+  }
+  main {
+    padding-inline: 5rem;
+  }
+  .country-details-main-info > span {
     display: flex;
+    gap: 4px;
+  }
+  .country-details-main-info > span > span {
+    white-space: nowrap;
+  }
+  .country-details-secondary-info {
+    margin-block: 0px;
+  }
+  .country-details-secondary-info > span {
+    display: flex;
+  }
+  .country-details-secondary-info > span > span {
+    white-space: nowrap;
+  }
+  .border-countries {
   }
 }
 
