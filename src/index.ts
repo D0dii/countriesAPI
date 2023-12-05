@@ -34,26 +34,20 @@ function initTheme() {
     mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   }
   if (mode === "dark") {
-    toggleTheme();
-    mode = "dark";
-    localStorage.setItem("theme", mode);
+    const body = document.querySelector("body") as HTMLElement;
     const modeIcon = document.querySelector(".mode-icon") as HTMLElement;
     const modeCaption = document.querySelector(".mode-caption") as HTMLElement;
+    localStorage.setItem("theme", mode);
     modeIcon.innerText = "light_mode";
     modeCaption.innerText = "Light Mode";
+    body.classList.add("dark");
   }
 }
 
 function toggleTheme() {
   const body = document.querySelector("body") as HTMLElement;
-  const navbar = document.querySelector(".navbar") as HTMLElement;
-  const filterByRegion = document.querySelector(".filter-by-region") as HTMLElement;
-  const searchBar = document.querySelector(".search-bar") as HTMLElement;
-  const cards = document.querySelectorAll(".card") as NodeListOf<HTMLElement>;
   const modeIcon = document.querySelector(".mode-icon") as HTMLElement;
   const modeCaption = document.querySelector(".mode-caption") as HTMLElement;
-  const goBackButton = document.querySelector(".arrow-back") as HTMLElement;
-  const borderCountries = document.querySelectorAll(".border-country") as NodeListOf<HTMLElement>;
   if (mode === "dark") {
     mode = "light";
     modeIcon.innerText = "dark_mode";
@@ -65,17 +59,6 @@ function toggleTheme() {
   }
   localStorage.setItem("theme", mode);
   body.classList.toggle("dark");
-  navbar.classList.toggle("dark");
-  filterByRegion ? filterByRegion.classList.toggle("dark") : "";
-  dropdown ? dropdown.classList.toggle("dark") : "";
-  searchBar ? searchBar.classList.toggle("dark") : "";
-  searchInput ? searchInput.classList.toggle("dark") : "";
-  cards
-    ? cards.forEach((card) => {
-        card.classList.toggle("dark");
-      })
-    : "";
-  goBackButton ? goBackButton.classList.toggle("dark") : "";
 }
 
 function toggleMenu() {
