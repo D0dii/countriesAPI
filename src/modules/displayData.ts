@@ -105,8 +105,12 @@ export class Displayer {
 
       const countryLanguages = document.querySelector('[data-role="country-languages"]') as HTMLElement;
       let countryLanguagesArray = (Object as any).values(element.languages);
-      countryLanguagesArray.forEach((language: String) => {
-        countryLanguages.textContent += language;
+      countryLanguagesArray.forEach((language: string) => {
+        if (countryLanguages.textContent) {
+          countryLanguages.textContent = countryLanguages.textContent + language;
+        } else {
+          countryLanguages.textContent = language;
+        }
         if (countryLanguagesArray[countryLanguagesArray.length - 1] !== language) {
           countryLanguages.textContent += ", ";
         }
