@@ -1,2 +1,2 @@
-Project made following frontendMentor challange
+Project made following frontendMentor challenge
 Link to site: https://country-api-marcin.netlify.app/
