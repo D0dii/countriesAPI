@@ -2,6 +2,7 @@ import { Displayer } from "./modules/displayData";
 
 let mode: string;
 
+const filterByRegion = document.querySelector(".filter-by-region") as HTMLElement;
 const openDropdown = document.querySelector(".open-dropdown") as HTMLElement;
 const dropdown = document.querySelector(".dropdown") as HTMLElement;
 const searchForm = document.querySelector(".search-form") as HTMLElement;
@@ -62,7 +63,6 @@ function toggleTheme() {
 }
 
 function toggleMenu() {
-  console.log(dropdown?.style.opacity);
   if (dropdown?.style.opacity == "0" || dropdown.style.opacity == "") {
     dropdown.style.opacity = "1";
     dropdown.style.pointerEvents = "all";
@@ -90,10 +90,13 @@ function selectRegion(e: MouseEvent) {
 
 function hideRegion(e: MouseEvent) {
   if (e.target instanceof Element) {
+    console.log(e.target);
     if (
-      !e.target.classList.contains("open-dropdown") &&
-      !e.target.classList.contains("dropdown") &&
-      !e.target.classList.contains("region")
+      e.target !== document.querySelector(".dropdown") &&
+      e.target !== document.querySelector(".region") &&
+      e.target !== document.querySelector(".filter-by-region") &&
+      e.target !== document.querySelector(".region-name") &&
+      e.target !== document.querySelector(".open-dropdown")
     ) {
       dropdown.style.opacity = "0";
       dropdown.style.pointerEvents = "none";
@@ -118,9 +121,9 @@ function init() {
     case "/":
     case "/index.html":
       dropdown.style.pointerEvents = "none";
-      openDropdown.addEventListener("click", toggleMenu);
       dropdown.addEventListener("click", selectRegion);
       document.addEventListener("click", hideRegion);
+      filterByRegion.addEventListener("click", toggleMenu);
       searchForm.addEventListener("submit", searchForCountry);
       closeRegionBtn.addEventListener("click", clearRegion);
       checkIfRegionSelected();

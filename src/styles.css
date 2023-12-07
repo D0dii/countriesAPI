@@ -172,6 +172,7 @@ main {
   gap: 1rem;
   position: relative;
   width: 210px;
+  cursor: pointer;
 }
 
 body.dark .filter-by-region {
