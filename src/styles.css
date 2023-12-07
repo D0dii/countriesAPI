@@ -81,6 +81,7 @@ select {
 
 body {
   background-color: #fafafa;
+  overflow: hidden;
 }
 
 a {
@@ -215,9 +216,14 @@ body.dark .dropdown {
   cursor: pointer;
 }
 
-.container {
+.countries-wrapper {
+  height: 80vh;
+  overflow-y: auto;
   margin-top: 3rem;
   padding-inline: 4rem;
+}
+
+.container {
   display: grid;
   grid-template-columns: 260px;
   gap: 5rem;
@@ -409,7 +415,7 @@ body.dark .border-country {
   }
 }
 
-@media screen and (min-width: 1050px) {
+@media screen and (min-width: 1100px) {
   main {
     padding-inline: 5rem;
   }
@@ -418,7 +424,7 @@ body.dark .border-country {
   }
 }
 
-@media screen and (min-width: 1350px) {
+@media screen and (min-width: 1450px) {
   .container {
     grid-template-columns: repeat(4, 260px);
   }

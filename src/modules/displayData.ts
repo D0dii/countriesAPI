@@ -23,9 +23,6 @@ export class Displayer {
         data.forEach((element) => {
           const card = document.createElement("div");
           card.classList.add("card");
-          if (localStorage.getItem("theme")) {
-            localStorage.getItem("theme") === "dark" ? card.classList.add("dark") : "";
-          }
           card.innerHTML = `
         <a href="details.html?name=${element.name.official}">
             <div>
