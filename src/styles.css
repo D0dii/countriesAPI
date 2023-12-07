@@ -217,7 +217,7 @@ body.dark .dropdown {
 }
 
 .countries-wrapper {
-  height: 80vh;
+  height: 70vh;
   overflow-y: auto;
   margin-top: 3rem;
   padding-inline: 4rem;
