@@ -60,10 +60,8 @@ export class Displayer {
       const element = data[0];
       const borderCountriesData = await Fetcher.fetchData("alpha?codes=" + element.borders);
 
-      console.log("element");
-      console.log(element);
       const countryImage = document.querySelector('[data-role="country-img"]') as HTMLImageElement;
-      countryImage.src = element.flags.png;
+      countryImage.src = element.flags.svg;
       countryImage.alt = element.flags.alt ? element.flags.alt : `Flag of ${element.name.common}`;
 
       const countryName = document.querySelector('[data-role="country-name"]') as HTMLElement;
