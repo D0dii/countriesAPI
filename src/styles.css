@@ -217,7 +217,7 @@ body.dark .dropdown {
 }
 
 .countries-wrapper {
-  height: 70vh;
+  height: calc(100vh - 17.5rem);
   overflow-y: auto;
   margin-top: 3rem;
   padding-inline: 4rem;
@@ -332,7 +332,7 @@ body.dark .arrow-back {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  height: calc(100vh - 14rem);
+  height: calc(100vh - 13.25rem);
 }
 
 .country-details-img {
@@ -423,6 +423,9 @@ body.dark .border-country {
   }
   .container {
     grid-template-columns: repeat(3, 260px);
+  }
+  .countries-wrapper {
+    height: calc(100vh - 12rem);
   }
 }
 
