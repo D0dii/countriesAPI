@@ -7,18 +7,18 @@ export class Displayer {
     const data: allCountriesData | null = await Fetcher.fetchCountries();
     const cardDiv = document.querySelector(".container");
     if (!data) {
-      const main = document.querySelector("main") as HTMLElement;
+      const countriesWrapper = document.querySelector(".countries-wrapper") as HTMLElement;
       const info = document.createElement("h1");
       info.innerText = "An error occured";
       info.style.textAlign = "center";
-      main.appendChild(info);
+      countriesWrapper.appendChild(info);
     } else {
       if (data.length === 0) {
-        const main = document.querySelector("main") as HTMLElement;
+        const countriesWrapper = document.querySelector(".countries-wrapper") as HTMLElement;
         const info = document.createElement("h1");
         info.innerText = "No matches found";
         info.style.textAlign = "center";
-        main.appendChild(info);
+        countriesWrapper.appendChild(info);
       } else {
         data.forEach((element) => {
           const card = document.createElement("div");

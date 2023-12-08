@@ -90,7 +90,6 @@ function selectRegion(e: MouseEvent) {
 
 function hideRegion(e: MouseEvent) {
   if (e.target instanceof Element) {
-    console.log(e.target);
     if (
       e.target !== document.querySelector(".dropdown") &&
       e.target !== document.querySelector(".region") &&

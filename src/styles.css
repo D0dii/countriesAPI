@@ -297,6 +297,9 @@ body.dark .dropdown > div:hover {
   .search-bar {
     width: 480px;
   }
+  .countries-wrapper {
+    height: calc(100vh - 12rem);
+  }
 }
 
 .arrow-back {
@@ -423,9 +426,6 @@ body.dark .border-country {
   }
   .container {
     grid-template-columns: repeat(3, 260px);
-  }
-  .countries-wrapper {
-    height: calc(100vh - 12rem);
   }
 }
 
