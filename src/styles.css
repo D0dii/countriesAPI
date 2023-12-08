@@ -217,7 +217,7 @@ body.dark .dropdown {
 }
 
 .countries-wrapper {
-  height: calc(100vh - 17.5rem);
+  height: calc(100vh - 18rem);
   overflow-y: auto;
   margin-top: 3rem;
   padding-inline: 4rem;
@@ -298,7 +298,7 @@ body.dark .dropdown > div:hover {
     width: 480px;
   }
   .countries-wrapper {
-    height: calc(100vh - 12rem);
+    height: calc(100vh - 13.5rem);
   }
 }
 
