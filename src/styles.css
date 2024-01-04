@@ -16,6 +16,22 @@ body.dark {
   color: #ffffff;
   background-color: var(--secondary);
 }
+
+.countries-wrapper::-webkit-scrollbar {
+  width: 0.75rem;
+  border-radius: 5px;
+  background-color: #eeeeee;
+}
+.countries-wrapper::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #dddddd;
+}
+body.dark .countries-wrapper::-webkit-scrollbar-thumb {
+  background-color: #333d36;
+}
+body.dark .countries-wrapper::-webkit-scrollbar {
+  background-color: #101b25;
+}
 /* Box sizing rules */
 *,
 *::before,
