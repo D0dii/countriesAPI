@@ -32,6 +32,37 @@ body.dark .countries-wrapper::-webkit-scrollbar-thumb {
 body.dark .countries-wrapper::-webkit-scrollbar {
   background-color: #101b25;
 }
+
+.loader {
+  width: 96px;
+  height: 96px;
+  border: 5px solid #2b3844;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+.loader.hidden {
+  display: none;
+}
+
+body.dark .loader {
+  border: 5px solid #fff;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 /* Box sizing rules */
 *,
 *::before,

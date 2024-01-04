@@ -4,7 +4,9 @@ export class Displayer {
   static async displayCountries() {
     const countriesDiv = document.querySelector(".container") as HTMLElement;
     countriesDiv.innerHTML = ``;
+    document.querySelector(".loader")?.classList.remove("hidden");
     const data: allCountriesData | null = await Fetcher.fetchCountries();
+    document.querySelector(".loader")?.classList.add("hidden");
     const cardDiv = document.querySelector(".container");
     if (!data) {
       const countriesWrapper = document.querySelector(".countries-wrapper") as HTMLElement;
@@ -55,7 +57,9 @@ export class Displayer {
       main.appendChild(info);
     } else {
       const element = data[0];
+      document.querySelector(".loader")?.classList.remove("hidden");
       const borderCountriesData = await Fetcher.fetchData("alpha?codes=" + element.borders);
+      document.querySelector(".loader")?.classList.add("hidden");
 
       const countryImage = document.querySelector('[data-role="country-img"]') as HTMLImageElement;
       countryImage.src = element.flags.svg;
