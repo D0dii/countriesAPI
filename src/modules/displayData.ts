@@ -47,8 +47,9 @@ export class Displayer {
   }
 
   static async displayCountryDetails() {
+    document.querySelector(".loader")?.classList.remove("hidden");
     const data: countryDetailsData | null = await Fetcher.fetchCountry();
-    console.log(data);
+    document.querySelector(".loader")?.classList.add("hidden");
     if (!data) {
       const main = document.querySelector("main") as HTMLElement;
       const info = document.createElement("h1");
@@ -57,9 +58,8 @@ export class Displayer {
       main.appendChild(info);
     } else {
       const element = data[0];
-      document.querySelector(".loader")?.classList.remove("hidden");
+
       const borderCountriesData = await Fetcher.fetchData("alpha?codes=" + element.borders);
-      document.querySelector(".loader")?.classList.add("hidden");
 
       const countryImage = document.querySelector('[data-role="country-img"]') as HTMLImageElement;
       countryImage.src = element.flags.svg;
