@@ -1,13 +1,10 @@
 import { Displayer } from "./modules/displayData";
 
-let mode: string;
-
 const filterByRegion = document.querySelector(".filter-by-region") as HTMLElement;
 const openDropdown = document.querySelector(".open-dropdown") as HTMLElement;
 const dropdown = document.querySelector(".dropdown") as HTMLElement;
 const searchForm = document.querySelector(".search-form") as HTMLElement;
 const searchInput = document.querySelector(".search-input") as HTMLInputElement;
-const changeMode = document.querySelector(".mode-change") as HTMLElement;
 const regionSpan = document.querySelector(".region-name") as HTMLElement;
 const closeRegionBtn = document.querySelector(".close-btn") as HTMLElement;
 
@@ -25,41 +22,6 @@ function clearRegion() {
   const params = new URLSearchParams(window.location.search);
   params.delete("region");
   window.location.search = params.toString();
-}
-
-function initTheme() {
-  let localStorageMode = localStorage.getItem("theme");
-  if (localStorageMode) {
-    mode = localStorageMode;
-  } else {
-    mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  }
-  if (mode === "dark") {
-    const body = document.querySelector("body") as HTMLElement;
-    const modeIcon = document.querySelector(".mode-icon") as HTMLElement;
-    const modeCaption = document.querySelector(".mode-caption") as HTMLElement;
-    localStorage.setItem("theme", mode);
-    modeIcon.innerText = "light_mode";
-    modeCaption.innerText = "Light Mode";
-    body.classList.add("dark");
-  }
-}
-
-function toggleTheme() {
-  const body = document.querySelector("body") as HTMLElement;
-  const modeIcon = document.querySelector(".mode-icon") as HTMLElement;
-  const modeCaption = document.querySelector(".mode-caption") as HTMLElement;
-  if (mode === "dark") {
-    mode = "light";
-    modeIcon.innerText = "dark_mode";
-    modeCaption.innerText = "Dark Mode";
-  } else {
-    mode = "dark";
-    modeIcon.innerText = "light_mode";
-    modeCaption.innerText = "Light Mode";
-  }
-  localStorage.setItem("theme", mode);
-  body.classList.toggle("dark");
 }
 
 function toggleMenu() {
@@ -114,8 +76,6 @@ function searchForCountry(e: any) {
 }
 
 function init() {
-  initTheme();
-  changeMode.addEventListener("click", toggleTheme);
   switch (window.location.pathname) {
     case "/":
     case "/index.html":
