@@ -68,11 +68,9 @@ function hideRegion(e: MouseEvent) {
 
 function searchForCountry(e: any) {
   e.preventDefault();
-  Displayer.displayCountries();
   const params = new URLSearchParams(window.location.search);
   params.set("search", searchInput.value);
   window.location.search = params.toString();
-  searchInput.value = "";
 }
 
 function init() {
@@ -87,6 +85,7 @@ function init() {
       closeRegionBtn.addEventListener("click", clearRegion);
       checkIfRegionSelected();
       Displayer.displayCountries();
+      searchInput.value = window.location.search ? window.location.search.split("=")[1] : "";
       break;
     case "/details.html":
       Displayer.displayCountryDetails();
