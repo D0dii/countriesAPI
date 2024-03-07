@@ -115,7 +115,6 @@ export class Displayer {
         }
       });
 
-      console.log(borderCountriesData);
       const countryBorderCountries = document.querySelector('[data-role="country-border-countries"]');
       if (borderCountriesData) {
         borderCountriesData.forEach((border) => {
