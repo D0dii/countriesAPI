@@ -85,7 +85,9 @@ function init() {
       closeRegionBtn.addEventListener("click", clearRegion);
       checkIfRegionSelected();
       Displayer.displayCountries();
-      searchInput.value = window.location.search ? window.location.search.split("=")[1] : "";
+      const params = new URLSearchParams(window.location.search);
+      const search = params.get("search");
+      searchInput.value = search ? search : "";
       break;
     case "/details.html":
       Displayer.displayCountryDetails();
